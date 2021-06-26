@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    marginLeft: 20
   },
   header: {
     width: '100%',
@@ -26,6 +27,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.highlight,
     fontSize: 13,
     marginRight: 24
+  
   },
   footer: {
     width: '100%',

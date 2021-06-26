@@ -6,16 +6,12 @@ import { styles } from './style';
 import PlayerSvg from '../../assets/player.svg';
 import CalendarSvg from '../../assets/calendar.svg';
 
+import { GuildProps } from '../Guild';
 import { GuildIcon } from '../GuildIcon';
 import { categories } from '../../utils/categorys';
 import { theme } from '../../global/styles/theme';
 
-export type GuildProps = {
-  id: string;
-  name: string;
-  icon: null,
-  owner: boolean;
-}
+
 
 export type AppointmentProps = {
   id: string;
@@ -37,7 +33,7 @@ export function Appointment({ data, ...rest }: Props) {
   return (
     <RectButton {...rest}>
       <View style={styles.container}>
-        <GuildIcon />
+        <GuildIcon guildId={data.guild.id} iconId={data.guild.icon}/>
 
         <View style={styles.content}>
           <View style={styles.header}>
@@ -60,11 +56,11 @@ export function Appointment({ data, ...rest }: Props) {
             </View>
 
             <View style={styles.playersInfo}>
-              <PlayerSvg fill={ owner ? primary : on}/>
+              <PlayerSvg fill={ owner ? on : primary}/>
 
               <Text style={[
                 styles.player, 
-                { color: owner ? primary : on }
+                { color: owner ? on : primary }
               ]}>
                 { owner ? 'Anfitrião' : 'Visitante' }
               </Text>

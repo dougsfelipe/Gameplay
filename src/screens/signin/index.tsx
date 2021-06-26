@@ -3,43 +3,56 @@ import {
     View,
     Text,
     Image,
-    StatusBar 
+    Alert,
+    ActivityIndicator
+
 } from 'react-native';
 
 import { ButtonIcon } from '../../components/ButtonIcons';
 import IllustrationImg from '../../assets/illustration.png';
 import { styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
-
+import { Background } from '../../components/Background'
+import { useAuth } from '../../hooks/auth'
+import { theme } from '../../global/styles/theme';
 
 export function Signin() {
-    const [text, setText] = useState('estado');
+    const { loading, signIn } = useAuth();
 
-    const navigation = useNavigation();
-
-    function handleSignIn() {
-        navigation.navigate('Home');
+    async function handleSignIn() {
+        try {
+            await signIn();
+        } catch (error) {
+            Alert.alert(error)
+        }
     }
 
+
+
     return (
-        <View style={styles.container}>
-           
-            <Image source={IllustrationImg} style={styles.image} />
-            <View style={styles.content}>
-                <Text style={styles.title}>
-                    Conecte-se {'\n'}
+        <Background>
+            <View style={styles.container}>
+
+                <Image source={IllustrationImg} style={styles.image} />
+                <View style={styles.content}>
+                    <Text style={styles.title}>
+                        Conecte-se {'\n'}
                     e organize suas{'\n'}
                     jogatinas
             </Text>
 
-                <Text style={styles.subtitle}>
-                    Crie grupos para jogar seus games {'\n'}
+                    <Text style={styles.subtitle}>
+                        Crie grupos para jogar seus games {'\n'}
                     favotiritos com seus amigos{'\n'}
-                </Text>
+                    </Text>
 
-                <ButtonIcon title="Entrar com Discord"  onPress={handleSignIn}/>
+                    {
+                        loading ? <ActivityIndicator color={theme.colors.primary}/> :
+                        <ButtonIcon title="Entrar com Discord" onPress={handleSignIn} />
+                    }
+
+                </View>
             </View>
-        </View>
+        </Background>
     );
 }
 

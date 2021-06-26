@@ -1,10 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  image: {
-    width: 64,
-    height: 64,
+  container: {
+    width: 62,
+    height: 66,
     borderRadius: 8,
-    marginRight: 20
+    backgroundColor: "#7289da",
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden'
+  },
+  image: {
+    width: 62,
+    height: 66,
   },
 });
